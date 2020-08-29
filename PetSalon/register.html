@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/6da635e2db.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"  href="css/style.css"> 
+    <title>Register</title>
+</head>
+<body>
+    <h1>the pet salon</h1>
+    <br>
+        
+            <form class="form1" action="" >
+                <p>
+                    <label for="pname">Petname:</label>
+                    <input type="text" id="petname" name="pname">
+                </p>
+                <p>
+                    <label class="pet-input" for="pnumber">Age:</label>
+                    <input type="number" id="age" name="pnumber">
+                </p>
+                <p>
+                    <label for="ptype">Type:</label>
+                    <select type="text" id="type" name="ptype">
+                        <option value="dog">Dog</option>
+                        <option value="cat">Cat</option>
+                        <option value="bird">Bird</option>
+                    </select>
+                </p>
+                <p>
+                    <label for ="pbreed">Breed:</label>
+                    <input type="text" id="breed" name="pbreed">
+                </p>
+                <p>
+                    <label for ="pgender">Gender:</label>
+                    <input type="text" id="gender" name="pgender">
+                </p>
+       
+            <p>
+                <label for= "pservice">Service:</label>
+                <select type="text" id="service" name="pservice">
+                    <option value=""disabled select>---Select a Service--</option>
+                    <option value="hair cut">Hair Grooming</option> 
+                    <option value="Shower">Shower</option> 
+                    <option value="Nail trim">Nail Trimming</option>
+                </select>
+            </p>
+            <p>
+                <label for= "powner">Owner:</label>
+                <input type="text" id="owner" name="powner">
+            </p>
+            <p>
+                <label for ="pcontact">Contact Phone:</label>
+                <input type="text" id="contact" name="pcontact">
+            </p>
+            <p>
+                <label for ="pemail">Email Address</label>
+                <input type="email" id="email" name="pemail">  
+            </p>
+            <p>
+                <label for ="pdate">Date</label>
+                <input type="date" id="date" name="pdate">  
+            </p>
+
+            <input id="btn-register" type="button" value="Register">
+        
+            </form>
+        
+    
+   <!--- <section class="container" id ="pets">
+
+    </section>-->
+   
+        <input type="search" name="search" id="petSearch">
+        <button class="btn btn-primery" onclick= "SearchPet">Search</button>
+
+    </section>
+    
+    <table class="pet-table">
+        <thead>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Type</th>
+            <th>Breed</th>
+            <th>Gender</th>
+            <th>Services</th>
+            <th>Owner</th>
+            <th>Contact Phone</th>
+            <th>Email</th>
+            <th>Date</th>
+        </thead>
+        <tbody id="rowPet">
+
+        </tbody>
+
+    </table>
+
+
+    
+   
+
+</body>
+
+
+</html>
