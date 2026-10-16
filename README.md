@@ -1,46 +1,49 @@
-# Pet_store-Project
-The Fashion Pet Project
-The Fashion Pet is a pet salon website that provides grooming services for pets. It is built using HTML, CSS, JavaScript, and JQuery.
+# The Fashion Pet
 
-Features
-Home page with information about the salon, its location, and its services
-Navigation bar with links to different sections of the website (Home, About Us, Services, Register)
-About Us page with information about the salon's mission and its services
-Services page with a list of services offered by the salon
-Register page where pet owners can register their pets for grooming services
-Footer with information about the salon (name, address, phone number)
-Map integration to display the salon's location
-Social media links (Facebook, Instagram, Twitter, TikTok)
-Display of registered pets with the ability to delete a pet
-Search function to search for a registered pet
-Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+A static website for a fictional pet grooming salon, with a map, a services page and a pet registration form.
 
-Prerequisites
-You will need a code editor like Visual Studio Code and a web browser to run the project.
+## Context
 
-Installing
-Clone the repository to your local machine
-bash
-Copy code
-git clone https://github.com/[YOUR_USERNAME]/thefashionpet.git
-Open the project in your code editor
-Run the index.html file in your web browser
-Built With
-HTML
-CSS
-JavaScript
-JQuery
-Author
-Mesaye Addisu
+I uploaded this in August 2020, a few months after I started learning web development. This README replaces a February 2023 one that overstated what works.
 
-License
-This project is licensed under the MIT License.
+## Stack
 
-Acknowledgments
-Font Awesome for providing icons
-Google Fonts for providing fonts
-Leaflet for providing the map integration
-BxSlider for providing the slider component
-Note
-This text was created using OpenAI's GPT-3 language model. pet services store
+- HTML, CSS, JavaScript, jQuery 3.5.1
+- Leaflet 1.6.0 with OpenStreetMap tiles for the map
+- Font Awesome (via a kit script) and Google Fonts
+- bxSlider 4.2.12 is loaded but not used
+
+## Running it
+
+Serve the `PetSalon` folder as the web root:
+
+```
+cd PetSalon
+python3 -m http.server 8000
+```
+
+Then open http://localhost:8000. The nav links load pages with paths like `../about.html` (`js/app.js`), which only resolve when `PetSalon` is the server root; opened straight from the file system they fail. The home page and map render; registration does not work (see below).
+
+## Status
+
+Archived. Not maintained.
+
+## Known gaps
+
+- `js/script.js` is loaded on the home page but expects the registration form. It throws at line 141 (`displayTable` looks for `#rowPet`, which doesn't exist there), so the rest of the file, including `init()`, never runs and the Register button is never wired. `register.html` opened on its own loads none of the app's scripts.
+- `js/directory.js` writes into `#pets`, which is commented out in `register.html` (lines 71-73), so it throws on load. Line 12 compares `type.length` to `"Dog"`.
+- `js/app.js` calls `initAbout`, `initServices` and `initRegister`, which are never defined.
+- Search: the button's `onclick` names an undefined `SearchPet` and doesn't call it (`register.html` line 76), and `searchPet` is nested inside `deletePet` (`js/script.js` lines 159-165) with `toLowercase` misspelled.
+- `clear()` sets `.val` instead of `.value` (`js/script.js` lines 111-122), so the form never clears. Table rows skip the Owner column, so they don't line up with the headers.
+- User input goes into the table through `innerHTML` template strings (`js/script.js` lines 127-139), which allows HTML injection.
+- Registrations live in an in-memory array; a reload loses them.
+- Accessibility: the logo and hero images have no `alt` (`index.html` lines 28, 54); nav links are `<a>` tags without `href` (lines 36-42), so they aren't keyboard-reachable; social icons link to `#`.
+- `services.html` has `<hi>` instead of a heading tag (line 14), a broken link to `../register.html/#c2` (line 17) and lorem ipsum text. `js/directory.js` hotlinks Google image thumbnails (lines 4, 6).
+- `bird.jpeg`, `dog.jpeg` and `images.jpeg` are unused. Several CSS values are invalid (`display: flexbox`, `border-radius: space-around`).
+- Icons come from a personal Font Awesome kit (`kit.fontawesome.com/6da635e2db.js`); if that kit is gone, icons won't load. No tests.
+
+## What I'd do differently now
+
+- Give each page its own script, or guard scripts against missing elements.
+- Keep the registration list in `localStorage` or a small API so it survives a reload.
+- Render rows with DOM APIs and `textContent` rather than HTML strings.
